@@ -1,0 +1,59 @@
+[gd_scene load_steps=8 format=3 uid="uid://3f2u7bf5aakg"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_o8xxu"]
+[ext_resource type="Texture2D" uid="uid://dtwfhj5hppi2s" path="res://assets/sprites/tilemap-characters_packed.png" id="1_tvv22"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yh8df"]
+atlas = ExtResource("1_tvv22")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_egve5"]
+atlas = ExtResource("1_tvv22")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_55adw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yh8df")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_egve5")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_scf32"]
+radius = 7.0
+height = 20.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_isqmf"]
+radius = 7.0
+height = 20.0
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 2
+script = ExtResource("1_o8xxu")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -12)
+sprite_frames = SubResource("SpriteFrames_55adw")
+autoplay = "default"
+frame_progress = 0.0424735
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -10)
+shape = SubResource("CapsuleShape2D_scf32")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, -10)
+shape = SubResource("CapsuleShape2D_isqmf")
+
+[connection signal="body_shape_entered" from="Hurtbox" to="." method="_on_hurtbox_body_shape_entered"]
