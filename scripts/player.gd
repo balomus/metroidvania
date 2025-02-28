@@ -48,7 +48,4 @@ func _on_hurtbox_body_shape_entered(body_rid: RID, body: Node2D, _body_shape_ind
 	
 	if tileType == "spike":
 		print('player hit a spike')
-		#get_tree().reload_current_scene()
 		get_tree().call_deferred("reload_current_scene")
-	
-	#print(get_custom_tile_data(body_rid, body, "type"))
