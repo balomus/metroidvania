@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://dwbcwlyr6x63e" path="res://assets/sprites/rock.png" id="7_j6smy"]
 [ext_resource type="Texture2D" uid="uid://cc23idq8ch18l" path="res://assets/sprites/sand.png" id="8_dsoa8"]
 [ext_resource type="Texture2D" uid="uid://k1aejdj2y5yr" path="res://assets/sprites/stone.png" id="9_akl4k"]
-[ext_resource type="Script" path="res://scripts/camera_2d.gd" id="10_g07tc"]
+[ext_resource type="Script" uid="uid://b2o73ijcxcinn" path="res://scripts/camera_2d.gd" id="10_g07tc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mx4bv"]
 texture = ExtResource("2_5oo1f")
