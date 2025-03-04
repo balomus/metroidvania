@@ -1,10 +1,12 @@
 extends CharacterBody2D
 
-
 const SPEED = 150.0
-const JUMP_VELOCITY = -260.0
+const JUMP_VELOCITY = -270.0
+
+var originalCoords: Vector2
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+
 
 
 func _physics_process(delta: float) -> void:
@@ -42,10 +44,29 @@ func _get_custom_tile_data(body_rid: RID, tilemap: Node2D, data_layer_name: Stri
 	else:
 		return null
 
+func killPlayer():
+	position = originalCoords
+	velocity.x = 0
+	velocity.y = 0
+
 func _on_hurtbox_body_shape_entered(body_rid: RID, body: Node2D, _body_shape_index: int, _local_shape_index: int) -> void:
 	print('something collided the player')
 	var tileType = _get_custom_tile_data(body_rid, body, "type")
 	
 	if tileType == "spike":
 		print('player hit a spike')
-		get_tree().call_deferred("reload_current_scene")
+		#get_tree().call_deferred("reload_current_scene")
+		#position = originalCoords
+		killPlayer()
+
+func applyUpwardForceFromRoomChange():
+	velocity.y = JUMP_VELOCITY
+	print('upward force applied')
+	
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	updateOriginalCoords(position)
+	#pass # Replace with function body.
+
+func updateOriginalCoords(newCoords: Vector2):
+	originalCoords = newCoords
